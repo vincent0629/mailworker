@@ -1,0 +1,15 @@
+{
+  "name": "mailworker",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler publish"
+  },
+  "dependencies": {
+    "postal-mime": "^2.7.1"
+  },
+  "devDependencies": {
+    "wrangler": "^4.54.0"
+  }
+}
