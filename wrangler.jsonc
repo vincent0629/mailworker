@@ -1,10 +1,5 @@
 {
   "name": "mailworker",
   "main": "src/index.js",
-  "compatibility_date": "2025-12-26",
-  "send_email": [
-    {
-      "name": "EMAIL"
-    }
-  ]
+  "compatibility_date": "2025-12-26"
 }
