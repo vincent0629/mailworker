@@ -3,15 +3,14 @@ import PostalMime from 'postal-mime';
 export default {
   async email(message, env, ctx) {
     const mail = await PostalMime.parse(message.raw);
-    console.log(mail);
     const form = new FormData();
-    form.append('from', mail.from.address);
-    form.append('to', mail.to.address);
+    form.append('sender', mail.from.address);
+    form.append('recipient', mail.to[0].address);
     form.append('subject', mail.subject);
     if (mail.text)
-      form.append('text', mail.text);
-    if (mail.html)
-      form.append('html', mail.html);
+      form.append('body-plain', mail.text);
+    else if (mail.html)
+      form.append('body-plain', mail.html);
     if (mail.attachments) {
       for (const attachment of mail.attachments) {
         let content = attachment.content;
@@ -20,9 +19,11 @@ export default {
         form.append('attachments', new Blob([content], { type: attachment.mimeType }), attachment.filename);
       }
     }
-    fetch(env.WEBHOOK_URL, {
-      method: 'POST',
-      body: form
-    });
+    await fetch(env.WEBHOOK_URL, {
+        method: 'POST',
+        body: form
+      })
+      .then(res => res.json())
+      .then(json => console.log(JSON.stringify(json)));
   }
 }
