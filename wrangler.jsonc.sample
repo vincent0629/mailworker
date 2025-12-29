@@ -1,0 +1,28 @@
+{
+	"name": "mailworker",
+	"main": "src/index.js",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"compatibility_date": "2025-12-26",
+	"workers_dev": true,
+	"preview_urls": true,
+	"vars": {
+		"WEBHOOK_URL": "<webhook url>"
+	},
+	"routes": [
+		{
+			"pattern": "<worker custom domain>",
+			"zone_name": "<root domain>",
+			"custom_domain": true
+		}
+	],
+	"send_email": [
+		{
+			"name": "EMAIL",
+			"allowed_destination_addresses": [
+				"<receiver email address>"
+                        ]
+		}
+	]
+}
