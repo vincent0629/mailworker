@@ -6,8 +6,8 @@ export default {
   async email(message, env, ctx) {
     const mail = await PostalMime.parse(message.raw);
     const form = new FormData();
-    form.append('sender', mail.from.address);
-    form.append('recipient', mail.to[0].address);
+    form.append('sender', mail.to[0].address);
+    form.append('recipient', message.to);
     form.append('subject', mail.subject);
     if (mail.text)
       form.append('body-plain', mail.text);
