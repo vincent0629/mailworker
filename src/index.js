@@ -47,7 +47,7 @@ export default {
       msg.addAttachment({
         filename: attachment.name,
         contentType: attachment.type,
-        data: btoa(await attachment.arrayBuffer()),
+        data: Buffer.from(await attachment.arrayBuffer()).toString('base64'),
       });
     }
 
