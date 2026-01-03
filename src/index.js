@@ -34,7 +34,7 @@ export default {
         body: form
       })
       .then(res => res.json())
-      .then(json => console.log(JSON.stringify(json)));
+      .then(json => console.log({from: unalias(message.from), to: message.to, response: JSON.stringify(json)}));
   },
 
   async fetch(request, env, ctx) {
@@ -62,8 +62,10 @@ export default {
     try {
       await env.EMAIL.send(new EmailMessage(from, to, msg.asRaw()));
     } catch (e) {
+      console.log({from, to, result: e.message});
       return new Response(e.message);
     }
+    console.log({from, to, result: 'Email sent successfully'});
     return new Response('Email sent successfully');
   },
 }

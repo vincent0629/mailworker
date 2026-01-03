@@ -10,6 +10,10 @@
 	"vars": {
 		"WEBHOOK_URL": "<webhook url>"
 	},
+        "observability": {
+                "enabled": true,
+                "head_sampling_rate": 1
+        },
 	"routes": [
 		{
 			"pattern": "<worker custom domain>",
