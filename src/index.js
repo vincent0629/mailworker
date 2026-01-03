@@ -2,11 +2,19 @@ import PostalMime from 'postal-mime';
 import { EmailMessage } from 'cloudflare:email';
 import { createMimeMessage } from 'mimetext';
 
+function unalias(address) {
+  const left = address.indexOf('+');
+  const right = address.indexOf('@');
+  if (left !== -1 && right !== -1 && left < right)
+    return address.slice(0, left) + address.slice(right);
+  return address;
+}
+
 export default {
   async email(message, env, ctx) {
     const mail = await PostalMime.parse(message.raw);
     const form = new FormData();
-    form.append('sender', mail.to[0].address);
+    form.append('sender', unalias(message.from));
     form.append('recipient', message.to);
     form.append('subject', mail.subject);
     if (mail.text)
