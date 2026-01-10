@@ -10,10 +10,12 @@
 	"vars": {
 		"WEBHOOK_URL": "<webhook url>"
 	},
-        "observability": {
-                "enabled": true,
-                "head_sampling_rate": 1
-        },
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"head_sampling_rate": 1
+		}
+	},
 	"routes": [
 		{
 			"pattern": "<worker custom domain>",
@@ -26,7 +28,7 @@
 			"name": "EMAIL",
 			"allowed_destination_addresses": [
 				"<receiver email address>"
-                        ]
+			]
 		}
 	]
 }
